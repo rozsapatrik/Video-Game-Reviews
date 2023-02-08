@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vgrModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="games">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GameName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="5000" Nullable="false" />
+    <Property Name="ReleaseDate" Type="date" Nullable="false" />
+    <Property Name="MainPlatform" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="MainGenre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Developer" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reviews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GameID" Type="uint" Nullable="false" />
+    <Property Name="UserID" Type="uint" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Review" Type="varchar" MaxLength="5000" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="uint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="admin" Type="bool" />
+  </EntityType>
+  <Association Name="reviews_ibfk_1">
+    <End Role="games" Type="Self.games" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="games">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="GameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reviews_ibfk_2">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+warning 6035: The relationship 'reviews_ibfk_3' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="reviews_ibfk_3" />-->
+  <EntityContainer Name="vgrModelStoreContainer">
+    <EntitySet Name="games" EntityType="Self.games" Schema="vgr2" store:Type="Tables" />
+    <EntitySet Name="reviews" EntityType="Self.reviews" Schema="vgr2" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="vgr2" store:Type="Tables" />
+    <AssociationSet Name="reviews_ibfk_1" Association="Self.reviews_ibfk_1">
+      <End Role="games" EntitySet="games" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="reviews_ibfk_2" Association="Self.reviews_ibfk_2">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

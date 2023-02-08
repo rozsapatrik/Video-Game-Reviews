@@ -1,0 +1,248 @@
+@font-face{
+  font-family: myFirstFont;
+  src: url(streg.ttf);
+}
+
+@font-face {
+  font-family: GeneralFont;
+  src: url(grav.otf);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("../CSS/bgimage.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-color: #252a2e;
+
+  font-family: GeneralFont;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+  #content-wrap {
+    padding-bottom: 2.5rem;    
+  }
+  
+  #footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    line-height: 1.5rem;     
+  }
+
+  #space {
+      width: 25px;
+  }
+
+  #siteform {
+    color: white;
+    margin: auto;
+    text-align: center;
+  }
+
+.login {
+    margin-bottom: 30px;
+  }
+
+  .blockdiv {
+    width: 60%;
+    background-color: rgba(61, 70, 77, 0.8);
+    margin-left: auto;
+    margin-right: auto;
+    height: 100%;
+    bottom: 0;
+    margin-top: 50px;
+    padding-bottom: 5px;
+    padding-top: 20px;
+    border-radius: 10px;
+    
+    animation: transitionIn 0.75s;
+  }
+
+  h1 {
+    color: white;
+    text-align: center;
+    padding-bottom: 10px;
+    font-family: myFirstFont;
+    text-shadow: 2px 2px 8px black;
+  }
+
+  .label {
+    color: white;
+    text-align: center;
+    padding-bottom: 40px;
+  }
+
+  .labelbottom {
+    color: white;
+    text-align: center;
+  }
+
+  .loginbutton{
+    padding-bottom: 50px;
+  }
+
+  .aboutus {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .text {
+    font-family: myFirstFont;
+    font-size: 1.1em;
+  }
+
+  footer div a{
+    color: white;
+  }
+  footer div a {
+    margin-left: 1%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+
+  #footerlogo {
+    margin-left: 23%;
+  }
+
+  #vgr2020 {
+    float: right;
+    margin-right: 1%;
+    margin-bottom: 1%;
+  }
+
+  #logopic
+  {
+    height: 30px;
+    margin-right: 45%;
+  }
+
+  #motto
+  {
+    font-style: italic;
+  }
+
+  #title
+  {
+    font-size: 4em;
+    text-shadow: 2px 2px 8px black;
+  }
+
+  #mainul
+  {
+    list-style-type: disc;
+    padding: 0;
+  }
+
+  .mainli{
+    padding-top: 2%;
+    padding: 0;
+  }
+
+  #selectagame
+  {
+    width: 50%;
+  }
+
+  .reviewlabel
+  {
+    padding-top: 3%;
+  }
+
+  #selectrating
+  {
+    width: 25%;
+  }
+
+  #divv {
+    padding-bottom: 2%;
+  }
+
+  textarea
+  {
+    width: 100%;
+  }
+
+  .games a
+  {
+    text-decoration: none;
+    color: white;
+    border-bottom: transparent 1px solid;
+  }
+  .games a:hover
+  {
+    text-decoration: none;
+    color: lightskyblue;
+    transition: 1s;
+    border-color: lightskyblue;
+  }
+
+  footer a
+  {
+    text-decoration: none;
+    color: white;
+  }
+
+  footer a:hover
+  {
+    text-decoration: none;
+    color: gray;
+    transition: 1s ease;
+  }
+
+  .italictext {
+    font-style: italic;
+  }
+
+  .sqllista {
+    padding-bottom: 0px;
+    padding-top: 0px;
+  }
+
+  .sqlp {
+    font-weight: bold;
+    text-decoration: underline;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+
+  .sqlpp {
+    font-weight: bold;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    margin-top: 30px;
+    margin-bottom: 0px;
+  }
+
+  td, tr, th {
+    text-align: center;
+    width: 10vw;
+  }
+  table
+  {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @keyframes transitionIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

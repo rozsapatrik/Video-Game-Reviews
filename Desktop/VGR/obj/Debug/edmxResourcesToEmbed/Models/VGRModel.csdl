@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vgrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="games">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GameName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ReleaseDate" Type="DateTime" Nullable="false" />
+    <Property Name="MainPlatform" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MainGenre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Developer" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="reviews" Relationship="Self.reviews_ibfk_1" FromRole="games" ToRole="reviews" />
+  </EntityType>
+  <EntityType Name="reviews">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GameID" Type="Int64" Nullable="false" />
+    <Property Name="UserID" Type="Int64" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Review" Type="String" MaxLength="5000" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="games" Relationship="Self.reviews_ibfk_1" FromRole="reviews" ToRole="games" />
+    <NavigationProperty Name="users" Relationship="Self.reviews_ibfk_2" FromRole="reviews" ToRole="users" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="admin" Type="Boolean" />
+    <NavigationProperty Name="reviews" Relationship="Self.reviews_ibfk_2" FromRole="users" ToRole="reviews" />
+  </EntityType>
+  <Association Name="reviews_ibfk_1">
+    <End Role="games" Type="Self.games" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="games">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="GameID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="reviews_ibfk_2">
+    <End Role="users" Type="Self.users" Multiplicity="1" />
+    <End Role="reviews" Type="Self.reviews" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="reviews">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="vgrEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="games" EntityType="Self.games" />
+    <EntitySet Name="reviews" EntityType="Self.reviews" />
+    <EntitySet Name="users" EntityType="Self.users" />
+    <AssociationSet Name="reviews_ibfk_1" Association="Self.reviews_ibfk_1">
+      <End Role="games" EntitySet="games" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+    <AssociationSet Name="reviews_ibfk_2" Association="Self.reviews_ibfk_2">
+      <End Role="users" EntitySet="users" />
+      <End Role="reviews" EntitySet="reviews" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

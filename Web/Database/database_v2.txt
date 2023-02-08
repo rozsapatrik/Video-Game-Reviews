@@ -1,0 +1,73 @@
+CREATE DATABASE vgr2 DEFAULT CHARACTER SET utf8 COLLATE utf8_hungarian_ci;
+USE vgr2;
+
+CREATE TABLE users (
+	id int(10) UNSIGNED AUTO_INCREMENT,
+	username varchar(30) NOT NULL,
+	password varchar(255) NOT NULL,
+	admin boolean,
+	PRIMARY KEY(id),
+	UNIQUE(username)
+);
+
+CREATE TABLE `Games`(
+	`ID` int(5) UNSIGNED AUTO_INCREMENT,
+	`GameName` varchar(50) NOT NULL,
+	`Description` varchar(5000) NOT NULL,
+	`ReleaseDate` date NOT NULL,
+	`MainPlatform` varchar(20) NOT NULL,
+	`MainGenre` varchar(20) NOT NULL,
+	`Developer` varchar(50) NOT NULL,
+	PRIMARY KEY(`ID`),
+	UNIQUE(`GameName`)
+);
+
+CREATE TABLE `Reviews`(
+	`ID` int(5) UNSIGNED AUTO_INCREMENT,
+	`GameID` int(5) UNSIGNED NOT NULL,
+	`UserID` int(5) UNSIGNED NOT NULL,
+	`Username` varchar(30) NOT NULL,
+	`Review` varchar(5000) NOT NULL,
+	FOREIGN KEY(`GameID`) REFERENCES Games(`ID`),
+	FOREIGN KEY(`UserID`) REFERENCES users(`ID`),
+	FOREIGN KEY(`Username`) REFERENCES users(`username`),
+	PRIMARY KEY(`ID`)
+);
+
+INSERT INTO users (username, password, admin) VALUES
+('admin1', '$2y$10$AeG2F9VDZ9l9K1gWFOor6eKRgUF7s.NQ5fyLOnJWpGWDxhJoOYphi', 1), 
+('admin2', '$2y$10$fYPXLnY0lMmwLRu37S0ideGjeBURKSAPRQH58iqBcxVFYUc.jyppS', 1), 
+('admin3', '$2y$10$VaRUmW1wi3SkKrKwpyLFiOuVYO5UHkALwJY.QCmaQ5fVqm3yZ13kG', 1), 
+('testuser', '$2y$10$Ev6vjgnEY.6kxMgQxXRnS.l1CAglkuYyARA/guJgAjyB324ot4ytC', 0);
+
+INSERT INTO Games (`GameName`, `ReleaseDate`, `MainPlatform`, `MainGenre`, `Developer`, `Description`) VALUES
+("Assassin's Creed: Syndicate", '2015-10-23', "PC", "Action", "Ubisoft", "The plot is set in a fictional history of real-world events and follows the centuries-old struggle between the Assassins, who fight for peace with liberty, and the Templars, who desire peace through order. The story is set in Victorian era London and follows twin assassins Jacob and Evie Frye as they navigate the corridors of organised crime, and take back the city from Templar control. Its open world design lets players freely roam London."),
+('Grand Theft Auto V', '2013-09-17', "PC", "Open World", "Rockstar Games", "The game is played from either a third-person or first-person perspective, and its world is navigated on foot or by vehicle. Players control the three lead protagonists throughout single-player and switch among them, both during and outside missions. The story is centred on the heist sequences, and many missions involve shooting and driving gameplay. A wanted system governs the aggression of law enforcement response to players who commit crimes. Grand Theft Auto Online, the game's online multiplayer mode, lets up to 30 players engage in a variety of different cooperative and competitive game modes."),
+('Counter-Strike: Global Offensive', '2012-08-21', "PC", "Shooter", "Valve", "The game pits two teams against each other: the Terrorists and the Counter-Terrorists. Both sides are tasked with eliminating the other while also completing separate objectives. The Terrorists, depending on the game mode, must either plant the bomb or defend the hostages, while the Counter-Terrorists must either prevent the bomb from being planted, defuse the bomb, or rescue the hostages. There are nine game modes, all of which have distinct characteristics specific to that mode. The game also has matchmaking support that allows players to play on dedicated Valve servers, as well as allowing members of the community to host their own servers with custom maps and game modes."),
+('Red Dead Redemption 2', '2018-10-26', "PC", "RPG", "Rockstar Games", "The game is presented through both first and third-person perspectives, and the player may freely roam in its interactive open world. Gameplay elements include shootouts, heists, hunting, horseback riding, interacting with non-player characters, and maintaining the character's honor rating through moral choices and deeds. A bounty system similar to the wanted system from the Grand Theft Auto franchise governs the response of law enforcement and bounty hunters to crimes committed by the player."),
+("Mirror's Edge Catalyst", '2016-06-07', "PC", "Parkour", "EA Games", "Mirror's Edge Catalyst is a first-person action-adventure game in which the player takes control of Faith Connors as she progresses through a futuristic city named Glass. Similar to the original Mirror's Edge, players traverse the city using aspects of urban exploration and parkour movements to complete missions and evade or fight enemies."),
+('Watch Dogs: Legion', '2020-10-29', "PC", "Open World", "Ubisoft", "Alongside traditional elements of gameplay from previous titles, Legion uses multiple playable characters that can be recruited and controlled at any time to complete missions. Each playable character has their own unique skills and backgrounds, and can be lost permanently if players enable the option of permadeath before starting a new game. Four-player cooperative multiplayer will also be included, allowing players to team up to complete missions or explore London together."),
+('Cyberpunk 2077', '2020-12-10', "PC", "Open World", "CD Projekt", "Adapted from the Cyberpunk franchise, the story takes place in dystopian Night City, an open world with six distinct regions. Players assume the first-person perspective of a customisable mercenary known as V, who can acquire skills in hacking and machinery, an arsenal of ranged weapons, and options for melee combat."),
+('Doom Eternal', '2020-03-20', "PC", "Horror", "Bethesda Softworks", "Set some time after the events of the 2016 game, the story follows the Doom Slayer once again, on a mission to end Hell's consumption of Earth and foil the alien Maykrs' plans to exterminate humanity. It received critical acclaim, with praise for its campaign, graphics, level design, soundtrack and combat mechanics, though some disliked the increased focus on storytelling and its platforming sections."),
+('Dirt 5', '2020-11-06', "PC", "Racing", "Codemasters", "Dirt 5 is a racing game focused on off-road racing. Disciplines within the game include rallycross, ice racing, Stadium Super Trucks and off-road buggies. Players can compete in events in a wide range of locations including Arizona, Brazil, Morocco, China, Italy, New York City and Norway."),
+('Resident Evil 7', '2017-01-24', "PC", "Horror", "Capcom", "The player controls Ethan Winters from a first-person perspective as he searches the Baker house for his missing wife. Although Ethan is a civilian with few combat skills, he is able to arm himself with a variety of weapons including handguns, shotguns, flamethrowers, explosives and chainsaws against the Baker family and a humanoid form of fungus known as the Molded."),
+('Street Fighter V', '2016-02-16', "PC", "Fighting", "Capcom", "Street Fighter V carries on the 2D fighting gameplay of its predecessors, in which two fighters use a variety of attacks and special abilities to knock out their opponent. The game features the EX gauge introduced in Street Fighter III, which builds as the player lands attacks and can be used to either power up special moves or perform super combos known as Critical Arts, although the Focus Attacks from the previous game have been removed."),
+('Mortal Kombat 11', '2019-04-23', "PC", "Fighting", "NetherRealm Studios", "Mortal Kombat 11 is a 2.5D fighting game. Alongside the returning Fatalities, Brutalities, Stage Fatalities, Friendships and Quitalities, new gameplay features are introduced, such as Fatal Blows and Krushing Blows."),
+('Minecraft', '2011-11-18', "PC", "Sandbox", "Mojang", "Minecraft is a 3D sandbox game that has no specific goals to accomplish, allowing players a large amount of freedom in choosing how to play the game. However, there is an achievement system, known as advancements in the Java Edition of the game. Gameplay is in the first-person perspective by default, but players have the option for third-person perspective."),
+('Fortnite', '2017-07-21', "PC", "Battle Royale", "Epic Games", "Fortnite is available in three distinct game mode versions that otherwise share the same general gameplay and game engine: Fortnite: Save the World, a cooperative hybrid-tower defense-shooter-survival game for up to four players to fight off zombie-like creatures and defend objects with traps and fortifications they can build; Fortnite Battle Royale, a free-to-play battle royale game in which up to 100 players fight to be the last person standing; and Fortnite Creative, in which players are given complete freedom to create worlds and battle arenas."),
+('League Of Legends', '2009-10-27', "PC", "MOBA", "Riot Games", "In League of Legends, players form a team of five and assume the role of a champion, characters with unique abilities, generally varying around a type of class, and battle against a team of player- or computer-controlled champions. In the main game mode, Summoner's Rift, the goal is to destroy the opposing team's Nexus, a structure that lies at the heart of their base and is protected by defensive structures."),
+("PlayerUnknown's Battlegrounds", '2016-07-30', "PC", "Battle Royale", "PUBG Corporation", "Battlegrounds is a player versus player shooter game in which up to one hundred players fight in a battle royale, a type of large-scale last man standing deathmatch where players fight to remain the last alive. Players can choose to enter the match solo, duo, or with a small team of up to four people. The last person or team alive wins the match."),
+('World Of Warcraft', '2004-11-23', "PC", "RPG", "Blizzard", "As with other MMORPGs, players control a character avatar within a game world in third- or first-person view, exploring the landscape, fighting various monsters, completing quests, and interacting with non-player characters or other players. Also similar to other MMORPGs, World of Warcraft requires the player to pay for a subscription by using a credit or debit card, using prepaid Blizzard game cards or using a WoW Token purchased in-game."),
+('Overwatch', '2015-10-27', "PC", "Shooter", "Blizzard", "Overwatch is an online team-based game generally played as a first-person shooter. The game features several different game modes, principally designed around squad-based combat with two opposing teams of six players each. Players select one of over two dozen pre-made hero characters from one of three class types: Damage heroes that deal most of the damage to attack or defend control points, Tank heroes that can absorb a large amount of damage, and Support heroes that provide healing or other buffs for their teammates."),
+('The Elder Scrolls V: Skyrim', '2011-11-11', "PC", "RPG", "Bethesda Softworks", "The Elder Scrolls V: Skyrim is an action role-playing game, playable from either a first or third-person perspective. The player may freely roam over the land of Skyrim which is an open world environment consisting of wilderness expanses, dungeons, caves, cities, towns, fortresses, and villages. Players may navigate the game world more quickly by riding horses, paying for a ride from a stable or by utilizing a fast-travel system which allows them to warp to previously discovered locations."),
+('Rocket League', '2015-07-07', "PC", "Racing", "Psyonix", "In Rocket League players control a rocket-powered car and use it to hit a ball that is much larger than the cars towards the other team goal area to score goals, in a way that resembles a soccer game, with elements reminiscent of a demolition derby."),
+('Dota 2', '2013-07-09', "PC", "MOBA", "Valve", "Dota 2 is a multiplayer online battle arena video game in which two teams of five players compete to collectively destroy a large structure defended by the opposing team known as the Ancient, whilst defending their own. As in Defense of the Ancients, the game is controlled using standard real-time strategy controls, and is presented on a single map in a three-dimensional isometric perspective."),
+('The Witcher 3: Wild Hunt', '2015-05-18', "PC", "RPG", "CD Projekt", "The Witcher 3: Wild Hunt is an action role-playing game with a third-person perspective. Players control Geralt of Rivia, a monster slayer known as a Witcher. Geralt walks, runs, rolls and dodges, jumps, climbs and swims. He has a variety of weapons, including bombs, a crossbow and two swords. The steel sword is used primarily to kill humans while the silver sword is more effective against creatures and monsters."),
+('The Last Of Us', '2013-06-14', "PlayStation 4", "Story", "Naughty Dog", "The Last of Us is an action-adventure survival horror game played from a third-person perspective. The player traverses post-apocalyptic environments such as towns, buildings, forests, and sewers to advance the story. The player can use firearms, improvised weapons, and stealth to defend against hostile humans and cannibalistic creatures infected by a mutated strain of the Cordyceps fungus. For most of the game, the player takes control of Joel, a man tasked with escorting a young girl, Ellie, across the United States."),
+('Star Wars Jedi: Fallen Order', '2019-11-15', "PC", "Adventure", "EA Games", "Star Wars Jedi: Fallen Order is an action-adventure video game played from a third-person perspective. It was inspired heavily by Batman: Arkham Asylum with regards to the combat system and the Metroidvania style of exploration and progression. Players control Cal Kestis and have access to a lightsaber and the Force, which are used in both combat and puzzle scenarios."),
+('God Of War', '2018-04-20', "PlayStation 4", "Action", "Sony Interactive", "Unlike previous games, which were loosely based on Greek mythology, this installment is rooted in Norse mythology, with the majority of it set in ancient Scandinavia in the realm of Midgard. For the first time in the series, there are two protagonists: Kratos, the former Greek God of War who remains the only playable character, and his young son Atreus. Following the death of Kratos' second wife and Atreus' mother, they journey to fulfill her request that her ashes be spread at the highest peak of the nine realms. Kratos keeps his troubled past a secret from Atreus, who is unaware of his divine nature. Along their journey, they encounter monsters and gods of the Norse world."),
+('Halo 5', '2015-10-27', "Xbox One", "Shooter", "343 Industries", "The game's plot follows two fireteams of human supersoldiers: Blue Team, led by Master Chief, and Fireteam Osiris, led by Spartan Locke. When the former goes absent without leave to track down the artificial intelligence construct Cortana, Master Chief's loyalty is called into question and Fireteam Osiris is sent to retrieve him.");
+
+INSERT INTO `reviews` (`ID`, `GameID`, `UserID`, `Username`, `Review`) VALUES
+(1, 2, 1, 'admin1', 'This game is good'),
+(2, 14, 1, 'admin1', 'This game is also good');

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="vgrModelStoreContainer" CdmEntityContainer="vgrEntities">
+    <EntitySetMapping Name="games">
+      <EntityTypeMapping TypeName="vgrModel.games">
+        <MappingFragment StoreEntitySet="games">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GameName" ColumnName="GameName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+          <ScalarProperty Name="MainPlatform" ColumnName="MainPlatform" />
+          <ScalarProperty Name="MainGenre" ColumnName="MainGenre" />
+          <ScalarProperty Name="Developer" ColumnName="Developer" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reviews">
+      <EntityTypeMapping TypeName="vgrModel.reviews">
+        <MappingFragment StoreEntitySet="reviews">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="GameID" ColumnName="GameID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Review" ColumnName="Review" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="vgrModel.users">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="admin" ColumnName="admin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
